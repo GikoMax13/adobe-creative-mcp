@@ -222,3 +222,38 @@ English: The Node MCP process is only the broker. AE and Photoshop must be runni
 - Keep HTTP bound to loopback unless a deliberate network design has been reviewed. / 除非经过明确的网络方案评审，否则保持 HTTP 只监听本机回环地址。
 - Disable `run_jsx` with `allowJsx: false` when an Agent should use only typed commands. / 如果 Agent 只能使用结构化命令，将 `allowJsx` 设为 `false` 关闭 `run_jsx`。
 - Keep the repository public-safe: source code and docs are public; user projects and production assets stay local. / 保持仓库可公开：公开源码和文档，用户工程和生产素材留在本机。
+
+## 11. GitHub CLI publishing / 使用 GitHub CLI 发布
+
+Install GitHub CLI on Windows with the official package manager:
+
+Windows 可以使用官方包管理器安装 GitHub CLI：
+
+```powershell
+winget install --id GitHub.cli --source winget --accept-source-agreements --accept-package-agreements
+gh auth login --hostname github.com --git-protocol https --web
+```
+
+Create and push a new public repository from an existing local checkout:
+
+从已有本地仓库创建并推送公开仓库：
+
+```powershell
+Set-Location "C:\path\to\adobe-creative-mcp"
+gh repo create <OWNER>/<REPOSITORY> `
+  --public `
+  --source . `
+  --remote origin `
+  --push `
+  --description "Local MCP bridge connecting After Effects and Photoshop for AI agents"
+```
+
+For this project, the public repository is:
+
+本项目当前的公开仓库是：
+
+`https://github.com/GikoMax13/adobe-creative-mcp`
+
+After changing source code or documentation, run `npm test`, inspect `git diff --check`, commit the change, and push `git push origin main`.
+
+修改源码或文档后，先运行 `npm test`，检查 `git diff --check`，再提交并执行 `git push origin main`。
