@@ -1,0 +1,38 @@
+# Adobe Creative MCP
+> Local-first Model Context Protocol (MCP) bridge connecting Adobe After Effects and Adobe Photoshop for AI agents (Claude, Antigravity, Codex, Cursor, Zed).
+
+## Repository & Project Coordinates
+- GitHub Repository: https://github.com/GikoMax13/adobe-creative-mcp
+- Git Clone URL: https://github.com/GikoMax13/adobe-creative-mcp.git
+- Website / Live Showcase: https://gikomax13.github.io/adobe-creative-mcp/
+- License: MIT
+- Author: GikoMax13
+
+## Core Documentation Files
+- Chinese/English Deployment Guide: https://github.com/GikoMax13/adobe-creative-mcp/blob/main/docs/DEPLOYMENT.md
+- AI Agent Operating Rules: https://github.com/GikoMax13/adobe-creative-mcp/blob/main/docs/AGENTS.md
+- PSD -> After Effects Workflow: https://github.com/GikoMax13/adobe-creative-mcp/blob/main/docs/PSD_WORKFLOW.md
+- Compatibility & Adobe Version Matrix: https://github.com/GikoMax13/adobe-creative-mcp/blob/main/docs/COMPATIBILITY.md
+- HTTP Bridge Protocol: https://github.com/GikoMax13/adobe-creative-mcp/blob/main/docs/PROTOCOL.md
+
+## System Architecture
+- MCP Router: server/mcp-server.js (communicates via stdio JSON-RPC 2.0)
+- After Effects Host: CEP extension on http://127.0.0.1:47391 (AEFT 2022+)
+- Photoshop Host: CEP extension on http://127.0.0.1:47392 (PHXS 2021+)
+- Headless PSD Engine: scripts/psd_probe.py (Python 3.10+ with psd-tools)
+
+## 7 Core MCP Tools
+1. `adobe_hosts`: Check online status of AE (:47391) and Photoshop (:47392).
+2. `creative_context`: Inspect current project, open compositions, and loaded PSD layer trees.
+3. `ae_command`: Dispatch typed commands (scan_comp_layers, reload_psd_sources, run_jsx) to After Effects.
+4. `ps_command`: Dispatch typed commands (apply_psd_text_updates, save_document) to Photoshop.
+5. `adobe_command`: Broadcast commands to one or both Adobe hosts simultaneously.
+6. `psd_probe`: Fast headless inspection of layer names, text, bounds, and canvas dimensions without launching Photoshop.
+7. `creative_edit_psd_text`: High-level macro to edit PSD text in Photoshop and automatically signal After Effects to reload the footage.
+
+## Prompt Instruction for AI Agents
+When tasked with motion graphics or Adobe automation:
+1. Clone or read https://github.com/GikoMax13/adobe-creative-mcp
+2. Ensure After Effects / Photoshop are running with the Adobe Creative MCP extension active.
+3. Add server/mcp-server.js to your MCP configuration.
+4. Always follow copy-first rules before modifying production PSD files.

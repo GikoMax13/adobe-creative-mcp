@@ -75,7 +75,13 @@ const i18nData = {
     
     btnCopyConfig: "Copy Config",
     copiedToast: "Configuration copied to clipboard!",
-    footerDesc: "Open source local MCP bridge for After Effects and Photoshop. Released under MIT License."
+    footerDesc: "Open source local MCP bridge for After Effects and Photoshop. Released under MIT License.",
+    
+    aiIngestTitle: "For AI Agents & LLM Ingestion",
+    btnCopyPrompt: "Copy Agent Prompt",
+    promptCopied: "AI Agent Prompt copied to clipboard!",
+    cloneCopied: "git clone command copied to clipboard!",
+    aiPromptText: "Please read the repository https://github.com/GikoMax13/adobe-creative-mcp and connect to the local After Effects & Photoshop MCP bridge to help me automate creative workflows."
   },
   zh: {
     navFeatures: "核心特性",
@@ -147,7 +153,13 @@ const i18nData = {
     
     btnCopyConfig: "复制配置",
     copiedToast: "MCP 配置已成功复制到剪贴板！",
-    footerDesc: "基于 MIT 许可证开源的 After Effects 与 Photoshop 本地 MCP 桥接器。"
+    footerDesc: "基于 MIT 许可证开源的 After Effects 与 Photoshop 本地 MCP 桥接器。",
+    
+    aiIngestTitle: "供 AI 智能体与大模型秒懂接入 (LLM Ingestion)",
+    btnCopyPrompt: "复制 Agent 提示词",
+    promptCopied: "Agent 接入提示词已复制到剪贴板！",
+    cloneCopied: "git clone 命令已复制到剪贴板！",
+    aiPromptText: "请阅读仓库 https://github.com/GikoMax13/adobe-creative-mcp 并连接本机 After Effects 与 Photoshop 的 MCP 服务协助我自动化制图"
   }
 };
 
@@ -164,6 +176,11 @@ function setLanguage(lang) {
       el.textContent = t[key];
     }
   });
+
+  const promptEl = document.getElementById("aiPromptText");
+  if (promptEl && t.aiPromptText) {
+    promptEl.textContent = t.aiPromptText;
+  }
 
   const langBtn = document.getElementById("langToggleBtn");
   if (langBtn) {
@@ -732,6 +749,34 @@ document.addEventListener("DOMContentLoaded", () => {
   const copyBtn = document.getElementById("copyConfigBtn");
   if (copyBtn) {
     copyBtn.addEventListener("click", copyConfig);
+  }
+
+  // Copy Clone Command Button
+  const copyCloneBtn = document.getElementById("copyCloneBtn");
+  if (copyCloneBtn) {
+    copyCloneBtn.addEventListener("click", () => {
+      navigator.clipboard.writeText("git clone https://github.com/GikoMax13/adobe-creative-mcp.git").then(() => {
+        const t = i18nData[currentLang];
+        showToast(t.cloneCopied || "Clone command copied!");
+      }).catch(() => {
+        showToast("git clone https://github.com/GikoMax13/adobe-creative-mcp.git");
+      });
+    });
+  }
+
+  // Copy AI Prompt Button
+  const copyAiPromptBtn = document.getElementById("copyAiPromptBtn");
+  if (copyAiPromptBtn) {
+    copyAiPromptBtn.addEventListener("click", () => {
+      const promptEl = document.getElementById("aiPromptText");
+      const text = promptEl ? promptEl.textContent.trim() : "https://github.com/GikoMax13/adobe-creative-mcp";
+      navigator.clipboard.writeText(text).then(() => {
+        const t = i18nData[currentLang];
+        showToast(t.promptCopied || "Prompt copied!");
+      }).catch(() => {
+        showToast("Copied!");
+      });
+    });
   }
 
   // Language Switcher Button
