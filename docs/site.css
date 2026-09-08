@@ -61,6 +61,10 @@ body {
   min-height: 100vh;
 }
 
+.nowrap {
+  white-space: nowrap;
+}
+
 /* Background canvas for motion particle grid */
 #bg-canvas {
   position: fixed;
