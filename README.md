@@ -1,5 +1,10 @@
 # Adobe Creative MCP
 
+[![Live Showcase](https://img.shields.io/badge/Live_Showcase-adobe--creative--mcp-7038ff?style=for-the-badge&logo=adobe&logoColor=white)](https://GikoMax13.github.io/adobe-creative-mcp/)
+[![GitHub Pages](https://img.shields.io/badge/GitHub_Pages-Online-00c8ff?style=flat-square&logo=github)](https://GikoMax13.github.io/adobe-creative-mcp/)
+
+🌐 **Live Website / 在线演示页面**: [https://GikoMax13.github.io/adobe-creative-mcp/](https://GikoMax13.github.io/adobe-creative-mcp/)
+
 中文部署入口 / Chinese deployment guide: [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md)
 
 The deployment guide is bilingual and is written for both human operators and AI Agents. / 部署文档为中英双语，同时面向人类使用者和 AI Agent。

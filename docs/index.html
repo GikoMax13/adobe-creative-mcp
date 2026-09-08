@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Adobe Creative MCP | Local MCP Bridge for After Effects & Photoshop</title>
+  <meta name="description" content="Local Model Context Protocol (MCP) bridge connecting After Effects and Photoshop for AI agents (Claude, Antigravity, Codex, Cursor). Coordinated PSD editing, motion graphics, and zero cloud lock-in." />
+  <meta property="og:title" content="Adobe Creative MCP - Bridge After Effects & Photoshop for AI Agents" />
+  <meta property="og:description" content="Automate motion graphics, PSD localization, and multi-app Adobe pipelines with local AI agents." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://GikoMax13.github.io/adobe-creative-mcp/" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./site.css" />
+</head>
+<body>
+  <!-- Ambient background glow spots -->
+  <div class="ambient-glow ambient-purple"></div>
+  <div class="ambient-glow ambient-cyan"></div>
+  <div class="ambient-glow ambient-bottom"></div>
+
+  <!-- Animated motion particle & bezier curve canvas -->
+  <canvas id="bg-canvas"></canvas>
+
+  <!-- Sticky Navigation -->
+  <nav class="navbar">
+    <div class="container nav-content">
+      <a href="#" class="logo-group">
+        <div class="app-badges">
+          <span class="app-badge ae">Ae</span>
+          <span class="badge-plus">+</span>
+          <span class="app-badge ps">Ps</span>
+          <span class="badge-mcp">MCP</span>
+        </div>
+        <span class="logo-text">Adobe Creative MCP</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#simulator" class="nav-link" data-i18n="navPlayground">Simulator</a></li>
+        <li><a href="#architecture" class="nav-link" data-i18n="navArch">Architecture</a></li>
+        <li><a href="#tools" class="nav-link" data-i18n="navTools">MCP Tools</a></li>
+        <li><a href="#features" class="nav-link" data-i18n="navFeatures">Features</a></li>
+        <li><a href="#quickstart" class="nav-link" data-i18n="navInstall">Quickstart</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button id="langToggleBtn" class="lang-btn" type="button" title="Switch Language">
+          English
+        </button>
+        <a href="https://github.com/GikoMax13/adobe-creative-mcp" target="_blank" rel="noopener noreferrer" class="github-btn">
+          <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          <span>GitHub</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero">
+    <div class="container">
+      <div class="hero-pill">
+        <span class="status-dot"></span>
+        <span data-i18n="heroPill">Production-Ready Local MCP Bridge</span>
+      </div>
+
+      <h1 class="hero-title">
+        <span data-i18n="heroTitle">Supercharge After Effects & Photoshop with Local AI Agents</span>
+      </h1>
+
+      <p class="hero-desc" data-i18n="heroDesc">
+        The local-first Model Context Protocol bridge connecting After Effects and Photoshop for Claude, Antigravity, Codex, and Cursor. Automate motion graphics, PSD localization, and multi-app production with zero cloud lock-in.
+      </p>
+
+      <div class="hero-cta">
+        <a href="#quickstart" class="btn btn-primary" data-i18n="btnGetStarted">Get Started Now</a>
+        <a href="#simulator" class="btn btn-secondary" data-i18n="btnSimulator">Launch Live Simulator</a>
+      </div>
+
+      <!-- Quick Status Strip -->
+      <div class="quick-status-strip">
+        <span><span class="status-dot"></span> <span data-i18n="statusAE">AE Host: Port 47391</span></span>
+        <span><span class="status-dot"></span> <span data-i18n="statusPS">PS Host: Port 47392</span></span>
+        <span><span class="status-dot"></span> <span data-i18n="statusMCP">MCP: Stdio Active</span></span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Section 1: The Interactive Playground Simulator -->
+  <section class="section" id="simulator">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag" data-i18n="simTag">Interactive Lab</div>
+        <h2 class="section-title" data-i18n="simTitle">Experience Coordinated Cross-App Automation</h2>
+        <p class="section-subtitle" data-i18n="simSubtitle">
+          Click a scenario below to watch the Agent modify Photoshop layers, trigger AE footage reload, and animate keyframes in real time.
+        </p>
+      </div>
+
+      <div class="playground-wrapper">
+        <!-- Preset Scenario Selector -->
+        <div class="scenario-bar">
+          <button type="button" class="scenario-btn active" data-scenario="1">
+            <span>⚡</span> <span data-i18n="scenario1">PSD Text Localization & AE Reload</span>
+          </button>
+          <button type="button" class="scenario-btn" data-scenario="2">
+            <span>🔍</span> <span data-i18n="scenario2">Headless PSD Probing</span>
+          </button>
+          <button type="button" class="scenario-btn" data-scenario="3">
+            <span>📐</span> <span data-i18n="scenario3">Batch Keyframe Replacement</span>
+          </button>
+          <button type="button" class="scenario-btn" data-scenario="4">
+            <span>🤝</span> <span data-i18n="scenario4">Host Handshake & Capability Check</span>
+          </button>
+        </div>
+
+        <!-- 3-Column Simulator Board -->
+        <div class="simulator-board">
+          <!-- Left: Photoshop Mock View -->
+          <div class="app-window">
+            <div class="window-header">
+              <div class="window-title">
+                <span class="app-badge ps" style="width:22px;height:22px;font-size:11px;">Ps</span>
+                <span>Photoshop 2024</span>
+              </div>
+              <span class="window-tag">PORT :47392</span>
+            </div>
+            <div class="ps-viewport">
+              <div class="psd-canvas-preview">
+                <div class="psd-text-box" id="simPsdBox">
+                  <div class="psd-main-text" id="simPsdMain">Title: Life Coaching</div>
+                  <div class="psd-sub-text" id="simPsdSub">Font: Inter-Bold | Layer: [Life Coaching]</div>
+                </div>
+              </div>
+              <div class="psd-layer-tree">
+                <div class="tree-header">PSD Layers (dialog.psd)</div>
+                <div class="layer-item active">
+                  <div class="layer-left">
+                    <span class="layer-icon">T</span>
+                    <span>Life Coaching</span>
+                  </div>
+                  <span class="layer-type">TextLayer</span>
+                </div>
+                <div class="layer-item">
+                  <div class="layer-left">
+                    <span class="layer-icon">🖼️</span>
+                    <span>Avatar_Mask</span>
+                  </div>
+                  <span class="layer-type">SmartObject</span>
+                </div>
+                <div class="layer-item">
+                  <div class="layer-left">
+                    <span class="layer-icon">🎨</span>
+                    <span>Background_Gradient</span>
+                  </div>
+                  <span class="layer-type">PixelLayer</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Center: Agent MCP Terminal Console -->
+          <div class="app-window terminal-window">
+            <div class="terminal-header">
+              <div class="mac-dots">
+                <span class="mac-dot red"></span>
+                <span class="mac-dot yellow"></span>
+                <span class="mac-dot green"></span>
+              </div>
+              <span class="terminal-title">mcp-server.js • stdio</span>
+              <span class="window-tag">JSON-RPC 2.0</span>
+            </div>
+            <div class="terminal-body" id="simTerminal">
+              <!-- Animated terminal lines inserted by site.js -->
+            </div>
+          </div>
+
+          <!-- Right: After Effects Mock View -->
+          <div class="app-window">
+            <div class="window-header">
+              <div class="window-title">
+                <span class="app-badge ae" style="width:22px;height:22px;font-size:11px;">Ae</span>
+                <span>After Effects 2024</span>
+              </div>
+              <span class="window-tag">PORT :47391</span>
+            </div>
+            <div class="ae-viewport">
+              <!-- Composition Preview Monitor -->
+              <div class="ae-comp-preview">
+                <span class="comp-badge">ACTIVE COMP • 1080x1080</span>
+                <div class="comp-element" id="simCompElement">
+                  <div class="comp-title" id="simAeTitle">Life Coaching</div>
+                  <div class="comp-subtitle" id="simAeSub">Render Comp 1080x1080 • PSD Reloaded</div>
+                </div>
+              </div>
+
+              <!-- Interactive Timeline Scrubber -->
+              <div class="ae-timeline">
+                <div class="timeline-top">
+                  <span class="timecode" id="simTimecode">00:00:01:15</span>
+                  <div class="timeline-controls">
+                    <button class="tl-btn" type="button">◀</button>
+                    <button class="tl-btn" type="button">▶</button>
+                    <button class="tl-btn" type="button">🔁</button>
+                  </div>
+                </div>
+                <div class="timeline-track-container" id="simTrackContainer" title="Drag to scrub timeline">
+                  <div class="timeline-ruler">
+                    <span>00s</span><span>01s</span><span>02s</span><span>03s</span><span>04s</span><span>05s</span>
+                  </div>
+                  <div class="timeline-layers">
+                    <div class="layer-bar psd-source">
+                      <span>dialog.psd (Linked Footage)</span>
+                    </div>
+                    <div class="layer-bar fx-track">
+                      <span>Transform & Keyframes</span>
+                      <span class="keyframe-dot" style="left: 10%;"></span>
+                      <span class="keyframe-dot" style="left: 50%;"></span>
+                      <span class="keyframe-dot" style="left: 85%;"></span>
+                    </div>
+                  </div>
+                  <div class="playhead" id="simPlayhead">
+                    <div class="playhead-head"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: Architecture Overview -->
+  <section class="section" id="architecture">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag" data-i18n="archTag">System Overview</div>
+        <h2 class="section-title" data-i18n="archTitle">Local-First Bidirectional Pipeline</h2>
+        <p class="section-subtitle" data-i18n="archSubtitle">
+          One unified MCP server bridging your local AI agents to Adobe ExtendScript runtimes over zero-latency localhost daemons.
+        </p>
+      </div>
+
+      <div class="glass arch-diagram-card">
+        <div class="arch-visual">
+          <!-- Node 1: AI Agent -->
+          <div class="arch-node agent-node">
+            <div class="node-icon agent">🤖</div>
+            <div class="node-title">AI Agents</div>
+            <div class="node-desc" data-i18n="nodeAgentDesc">Claude, Antigravity, Codex, Cursor</div>
+            <span class="node-tag">MCP Client</span>
+          </div>
+
+          <!-- Connector Wire 1 -->
+          <div class="arch-connector">
+            <div class="wire"></div>
+            <span class="connector-label">stdio JSON-RPC</span>
+          </div>
+
+          <!-- Node 2: MCP Server -->
+          <div class="arch-node mcp-node">
+            <div class="node-icon mcp">⚡</div>
+            <div class="node-title">MCP Bridge Server</div>
+            <div class="node-desc" data-i18n="nodeMcpDesc">Stdio JSON-RPC 2.0 Router</div>
+            <span class="node-tag">server/mcp-server.js</span>
+          </div>
+
+          <!-- Connector Wire 2 -->
+          <div class="arch-connector">
+            <div class="wire"></div>
+            <span class="connector-label">HTTP Loopback</span>
+          </div>
+
+          <!-- Node 3: Dual Hosts Container -->
+          <div class="dual-hosts">
+            <div class="arch-node ae-node">
+              <div class="node-icon ae">Ae</div>
+              <div class="node-title">After Effects Panel</div>
+              <div class="node-desc" data-i18n="nodeAeDesc">Port 47391 • ExtendScript Host</div>
+              <span class="node-tag">com.leyo.ae.codexbridge</span>
+            </div>
+
+            <div class="arch-node ps-node">
+              <div class="node-icon ps">Ps</div>
+              <div class="node-title">Photoshop Panel</div>
+              <div class="node-desc" data-i18n="nodePsDesc">Port 47392 • DOM Layer Engine</div>
+              <span class="node-tag">com.leyo.ae.codexbridge</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: 7 Precision MCP Tools -->
+  <section class="section" id="tools">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag" data-i18n="toolsTag">API Reference</div>
+        <h2 class="section-title" data-i18n="toolsTitle">7 Precision MCP Tools for Creative Workflows</h2>
+        <p class="section-subtitle" data-i18n="toolsSubtitle">
+          Engineered specifically for high-reliability agentic manipulation of complex design documents and video compositions.
+        </p>
+      </div>
+
+      <!-- Tools Tab Strip -->
+      <div class="tools-tabs">
+        <button type="button" class="tool-tab active" data-tool="creative_edit_psd_text">creative_edit_psd_text</button>
+        <button type="button" class="tool-tab" data-tool="psd_probe">psd_probe</button>
+        <button type="button" class="tool-tab" data-tool="creative_context">creative_context</button>
+        <button type="button" class="tool-tab" data-tool="adobe_hosts">adobe_hosts</button>
+        <button type="button" class="tool-tab" data-tool="ae_command">ae_command</button>
+        <button type="button" class="tool-tab" data-tool="ps_command">ps_command</button>
+        <button type="button" class="tool-tab" data-tool="adobe_command">adobe_command</button>
+      </div>
+
+      <!-- Tool Detail Card -->
+      <div class="glass tool-details-card">
+        <div class="tool-info-pane">
+          <h3 id="toolName">creative_edit_psd_text</h3>
+          <p class="tool-desc" id="toolDesc">
+            High-level coordinated macro: edit text inside Photoshop PSD, save changes, and immediately trigger AE to reload the updated PSD footage asset.
+          </p>
+
+          <table class="param-table">
+            <thead>
+              <tr>
+                <th>Parameter</th>
+                <th>Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody id="toolParams">
+              <!-- Parameters inserted by site.js -->
+            </tbody>
+          </table>
+        </div>
+
+        <div class="code-preview-pane">
+          <button type="button" class="code-copy-btn" onclick="showToast('Sample copied!')">Copy</button>
+          <pre id="toolCodePreview"></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: Features Grid -->
+  <section class="section" id="features">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag" data-i18n="featuresTag">Capabilities</div>
+        <h2 class="section-title" data-i18n="featuresTitle">Why Adobe Creative MCP?</h2>
+        <p class="section-subtitle" data-i18n="featuresSubtitle">
+          Built by motion designers and engineers to bridge the gap between Large Language Models and Adobe Creative Cloud.
+        </p>
+      </div>
+
+      <div class="features-grid">
+        <div class="glass feature-card">
+          <div class="feature-icon-box">🎛️</div>
+          <h3 class="feature-title" data-i18n="f1Title">Dual-Host Architecture</h3>
+          <p class="feature-desc" data-i18n="f1Desc">
+            Unified CEP panel installer and runtime supporting both After Effects 2022+ and Photoshop 2021+ with automatic host discovery.
+          </p>
+        </div>
+
+        <div class="glass feature-card">
+          <div class="feature-icon-box">🔄</div>
+          <h3 class="feature-title" data-i18n="f2Title">Coordinated Cross-App Flow</h3>
+          <p class="feature-desc" data-i18n="f2Desc">
+            Modify PSD text in Photoshop and automatically signal After Effects to reload the linked asset with zero manual refresh steps.
+          </p>
+        </div>
+
+        <div class="glass feature-card">
+          <div class="feature-icon-box">🔬</div>
+          <h3 class="feature-title" data-i18n="f3Title">Headless PSD Probing</h3>
+          <p class="feature-desc" data-i18n="f3Desc">
+            Read layer trees, bounds, canvas sizes, and text content directly via Python psd-tools without even launching Photoshop.
+          </p>
+        </div>
+
+        <div class="glass feature-card">
+          <div class="feature-icon-box">🛡️</div>
+          <h3 class="feature-title" data-i18n="f4Title">100% Local & Private</h3>
+          <p class="feature-desc" data-i18n="f4Desc">
+            Zero cloud dependencies. High-resolution raw PSDs, project aep files, and footage never leave your workstation.
+          </p>
+        </div>
+
+        <div class="glass feature-card">
+          <div class="feature-icon-box">⏪</div>
+          <h3 class="feature-title" data-i18n="f5Title">Reversible & Safe Workflows</h3>
+          <p class="feature-desc" data-i18n="f5Desc">
+            Copy-first safeguards, explicit layer path addressing, and typed commands prevent accidental corruption of production masters.
+          </p>
+        </div>
+
+        <div class="glass feature-card">
+          <div class="feature-icon-box">🌐</div>
+          <h3 class="feature-title" data-i18n="f6Title">Universal Agent Support</h3>
+          <p class="feature-desc" data-i18n="f6Desc">
+            Seamlessly plug into Claude Desktop, Google Antigravity, OpenAI Codex, Cursor, Zed, Windsurf, or custom Node.js agents.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: Quickstart & Setup Guide -->
+  <section class="section" id="quickstart">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag" data-i18n="quickTag">Setup Guide</div>
+        <h2 class="section-title" data-i18n="quickTitle">Get Running in Under 2 Minutes</h2>
+        <p class="section-subtitle" data-i18n="quickSubtitle">
+          Simple PowerShell installation, automatic panel deployment, and standardized MCP agent configuration.
+        </p>
+      </div>
+
+      <!-- 4 Steps Workflow -->
+      <div class="steps-container">
+        <div class="step-card">
+          <span class="step-number" data-i18n="step1Num">STEP 01</span>
+          <h4 class="step-title" data-i18n="step1Title">Run Windows Installer</h4>
+          <p class="step-desc" data-i18n="step1Desc">
+            Run install_windows.ps1 in PowerShell to register CEP panels for both AE and Photoshop.
+          </p>
+        </div>
+
+        <div class="step-card">
+          <span class="step-number" data-i18n="step2Num">STEP 02</span>
+          <h4 class="step-title" data-i18n="step2Title">Open Extension Panels</h4>
+          <p class="step-desc" data-i18n="step2Desc">
+            In AE and Photoshop: Window > Extensions > Adobe Creative MCP. Host daemons auto-start.
+          </p>
+        </div>
+
+        <div class="step-card">
+          <span class="step-number" data-i18n="step3Num">STEP 03</span>
+          <h4 class="step-title" data-i18n="step3Title">Add Agent MCP Config</h4>
+          <p class="step-desc" data-i18n="step3Desc">
+            Copy the JSON configuration below into your AI Agent's MCP settings file.
+          </p>
+        </div>
+
+        <div class="step-card">
+          <span class="step-number" data-i18n="step4Num">STEP 04</span>
+          <h4 class="step-title" data-i18n="step4Title">Command Your Agent</h4>
+          <p class="step-desc" data-i18n="step4Desc">
+            Ask your agent: 'Probe dialog.psd, change the title to Japanese, and refresh AE!'
+          </p>
+        </div>
+      </div>
+
+      <!-- Interactive MCP Configuration Codebox -->
+      <div class="config-box">
+        <div class="config-header">
+          <div class="config-tabs">
+            <button type="button" class="config-tab-btn active" data-cfg="claude">Claude Desktop</button>
+            <button type="button" class="config-tab-btn" data-cfg="antigravity">Antigravity</button>
+            <button type="button" class="config-tab-btn" data-cfg="cursor">Cursor / Zed</button>
+            <button type="button" class="config-tab-btn" data-cfg="cli">Node CLI Check</button>
+          </div>
+          <button type="button" id="copyConfigBtn" class="btn btn-primary" style="padding:6px 16px; font-size:12px;" data-i18n="btnCopyConfig">
+            Copy Config
+          </button>
+        </div>
+        <pre class="config-code-view" id="configCode"></pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="logo-group">
+          <div class="app-badges">
+            <span class="app-badge ae">Ae</span>
+            <span class="badge-plus">+</span>
+            <span class="app-badge ps">Ps</span>
+          </div>
+          <span class="logo-text">Adobe Creative MCP</span>
+        </div>
+
+        <div class="footer-links">
+          <a href="https://github.com/GikoMax13/adobe-creative-mcp/blob/main/docs/DEPLOYMENT.md" target="_blank" class="footer-link">Deployment Guide</a>
+          <a href="https://github.com/GikoMax13/adobe-creative-mcp/blob/main/docs/AGENTS.md" target="_blank" class="footer-link">Agent Guidelines</a>
+          <a href="https://github.com/GikoMax13/adobe-creative-mcp/blob/main/docs/PSD_WORKFLOW.md" target="_blank" class="footer-link">PSD Workflow</a>
+          <a href="https://github.com/GikoMax13/adobe-creative-mcp/blob/main/docs/COMPATIBILITY.md" target="_blank" class="footer-link">Compatibility</a>
+          <a href="https://github.com/GikoMax13/adobe-creative-mcp" target="_blank" class="footer-link">GitHub Repository</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p data-i18n="footerDesc">Open source local MCP bridge for After Effects and Photoshop. Released under MIT License.</p>
+        <p style="margin-top:8px; color: var(--text-dim); font-size: 11px;">
+          Adobe After Effects and Adobe Photoshop are registered trademarks of Adobe Inc. This project is not affiliated with Adobe Inc.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="./site.js"></script>
+</body>
+</html>
