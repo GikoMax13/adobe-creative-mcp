@@ -1,5 +1,9 @@
 # Adobe Creative MCP
 
+中文部署入口 / Chinese deployment guide: [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md)
+
+The deployment guide is bilingual and is written for both human operators and AI Agents. / 部署文档为中英双语，同时面向人类使用者和 AI Agent。
+
 Adobe Creative MCP is a local MCP bridge for AI agents that connects **After Effects**, **Photoshop**, and one shared MCP server.
 
 It supports three modes:
