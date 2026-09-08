@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <title>Adobe Creative MCP</title>
+    <link rel="stylesheet" href="./css/panel.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="topbar">
+        <div>
+          <h1>Adobe Creative MCP</h1>
+          <p id="status">面板未启动。启动后 Agent 可以连接当前 Adobe 宿主。</p>
+        </div>
+        <div class="top-actions">
+          <button id="startBtn" class="primary" type="button" onclick="window.AdobeCreativeMCPStart && window.AdobeCreativeMCPStart()">启动 MCP</button>
+          <button id="stopBtn" type="button" disabled onclick="window.AdobeCreativeMCPStop && window.AdobeCreativeMCPStop()">停止 MCP</button>
+        </div>
+      </header>
+
+      <section class="grid">
+        <div class="panel">
+          <div class="panel-title">状态</div>
+          <dl class="kv">
+            <dt>文件桥接</dt>
+            <dd id="fileState">未启动</dd>
+            <dt>HTTP</dt>
+            <dd id="httpState">未启动</dd>
+            <dt>HTTP 地址</dt>
+            <dd id="httpUrl">127.0.0.1:47391</dd>
+            <dt>当前宿主</dt>
+            <dd id="hostRole">检测中</dd>
+            <dt>版本</dt>
+            <dd id="bridgeVersion">检测中</dd>
+            <dt>Token</dt>
+            <dd id="tokenState">未设置</dd>
+          </dl>
+        </div>
+
+        <div class="panel">
+          <div class="panel-title">桥接路径</div>
+          <div class="path" id="bridgePath"></div>
+          <div class="button-row">
+            <button type="button" onclick="window.AdobeCreativeMCPCopyPath && window.AdobeCreativeMCPCopyPath()">复制路径</button>
+            <button type="button" onclick="window.AdobeCreativeMCPOpenPath && window.AdobeCreativeMCPOpenPath()">打开目录</button>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-title">最近命令</div>
+          <pre id="lastCommand" class="log">暂无</pre>
+        </div>
+
+        <div class="panel">
+          <div class="panel-title">最近结果</div>
+          <pre id="lastResult" class="log">暂无</pre>
+        </div>
+      </section>
+    </main>
+    <script src="./js/panel.js?v=20260908-2"></script>
+  </body>
+</html>

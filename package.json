@@ -1,0 +1,15 @@
+{
+  "name": "adobe-creative-mcp",
+  "version": "2.0.0",
+  "description": "Local MCP bridge connecting After Effects and Photoshop for AI agents.",
+  "private": false,
+  "main": "server/mcp-server.js",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "test": "node tests/validate.mjs",
+    "mcp:check": "node server/mcp-server.js --check"
+  }
+}
