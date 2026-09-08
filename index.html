@@ -12,7 +12,24 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="alternate" type="text/plain" href="./llms.txt" title="LLMs.txt" />
   <link rel="stylesheet" href="./site.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareSourceCode",
+    "name": "Adobe Creative MCP",
+    "codeRepository": "https://github.com/GikoMax13/adobe-creative-mcp",
+    "programmingLanguage": ["JavaScript", "ExtendScript", "Python"],
+    "description": "Local MCP bridge connecting After Effects and Photoshop for AI agents",
+    "license": "https://opensource.org/licenses/MIT",
+    "author": {
+      "@type": "Person",
+      "name": "GikoMax13",
+      "url": "https://github.com/GikoMax13"
+    }
+  }
+  </script>
 </head>
 <body>
   <!-- Ambient background glow spots -->
@@ -72,6 +89,27 @@
         The local-first Model Context Protocol bridge connecting After Effects and Photoshop for Claude, Antigravity, Codex, and Cursor. Automate motion graphics, PSD localization, and multi-app production with zero cloud lock-in.
       </p>
 
+      <!-- Prominent GitHub Repository URL & Clone Card (Top Priority) -->
+      <div class="hero-repo-card">
+        <div class="repo-card-top">
+          <div class="repo-identity">
+            <svg class="repo-icon-svg" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+            <a href="https://github.com/GikoMax13/adobe-creative-mcp" target="_blank" rel="noopener noreferrer" class="repo-full-url" id="repoUrlLink">
+              https://github.com/GikoMax13/adobe-creative-mcp
+            </a>
+          </div>
+          <div class="repo-meta-badges">
+            <span class="repo-tag-badge">Public Repo</span>
+            <span class="repo-tag-badge">MIT License</span>
+            <span class="repo-tag-badge">AE 2022+ & PS 2021+</span>
+          </div>
+        </div>
+        <div class="repo-clone-row">
+          <div class="clone-text"><span class="clone-prefix">$</span>git clone https://github.com/GikoMax13/adobe-creative-mcp.git</div>
+          <button type="button" class="repo-copy-btn" id="copyCloneBtn">Copy Clone</button>
+        </div>
+      </div>
+
       <div class="hero-cta">
         <a href="#quickstart" class="btn btn-primary" data-i18n="btnGetStarted">Get Started Now</a>
         <a href="#simulator" class="btn btn-secondary" data-i18n="btnSimulator">Launch Live Simulator</a>
@@ -82,6 +120,31 @@
         <span><span class="status-dot"></span> <span data-i18n="statusAE">AE Host: Port 47391</span></span>
         <span><span class="status-dot"></span> <span data-i18n="statusPS">PS Host: Port 47392</span></span>
         <span><span class="status-dot"></span> <span data-i18n="statusMCP">MCP: Stdio Active</span></span>
+      </div>
+
+      <!-- AI Agent Ingest Banner (Specially engineered for LLMs & AI reading) -->
+      <div class="ai-ingest-container">
+        <div class="ai-ingest-card">
+          <div class="ai-ingest-header">
+            <div class="ai-ingest-title-group">
+              <span class="ai-icon-pulse">🤖</span>
+              <span class="ai-ingest-title" data-i18n="aiIngestTitle">For AI Agents & LLM Ingestion / 供 AI 智能体秒懂接入</span>
+            </div>
+            <div class="ai-ingest-actions">
+              <a href="./llms.txt" target="_blank" class="ai-pill-link">📄 llms.txt (Machine-Readable)</a>
+              <a href="https://github.com/GikoMax13/adobe-creative-mcp/blob/main/docs/DEPLOYMENT.md" target="_blank" class="ai-pill-link">📘 DEPLOYMENT.md</a>
+              <a href="https://github.com/GikoMax13/adobe-creative-mcp/blob/main/docs/AGENTS.md" target="_blank" class="ai-pill-link">⚡ AGENTS.md</a>
+            </div>
+          </div>
+          <div class="ai-prompt-box">
+            <div class="ai-prompt-text" id="aiPromptText">
+              请阅读仓库 https://github.com/GikoMax13/adobe-creative-mcp 并连接本机 After Effects 与 Photoshop 的 MCP 服务协助我自动化制图
+            </div>
+            <button type="button" class="ai-prompt-copy-btn" id="copyAiPromptBtn" data-i18n="btnCopyPrompt">
+              复制 Agent 提示词
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </header>
