@@ -12,7 +12,7 @@ const i18nData = {
     navTools: "MCP Tools",
     navInstall: "Quickstart",
     heroPill: "Production-Ready Local MCP Bridge",
-    heroTitle: "Supercharge After Effects & Photoshop with Local AI Agents",
+    heroTitle: "Supercharge <span class=\"nowrap\">After Effects</span> & Photoshop<br>with Local AI Agents",
     heroDesc: "The local-first Model Context Protocol bridge connecting After Effects and Photoshop for Claude, Antigravity, Codex, and Cursor. Automate motion graphics, PSD localization, and multi-app production with zero cloud lock-in.",
     btnGetStarted: "Get Started Now",
     btnSimulator: "Launch Live Simulator",
@@ -90,7 +90,7 @@ const i18nData = {
     navTools: "MCP 工具集",
     navInstall: "快速开始",
     heroPill: "生产级本地 MCP 创意工作流桥接器",
-    heroTitle: "让 AI Agent 深度驱动 After Effects 与 Photoshop",
+    heroTitle: "让 AI Agent 深度驱动<br><span class=\"nowrap\">After Effects</span> 与 Photoshop",
     heroDesc: "专为 Claude、Antigravity、Codex、Cursor 等 AI 打造的本地优先 Model Context Protocol 桥接套件。打通动效合成、PSD 多图层本地化、跨软件联动与渲染管线，零云端依赖，数据完全本地隔离。",
     btnGetStarted: "立即快速部署",
     btnSimulator: "进入交互模拟器",
@@ -173,7 +173,11 @@ function setLanguage(lang) {
   document.querySelectorAll("[data-i18n]").forEach(el => {
     const key = el.getAttribute("data-i18n");
     if (t[key]) {
-      el.textContent = t[key];
+      if (t[key].includes("<")) {
+        el.innerHTML = t[key];
+      } else {
+        el.textContent = t[key];
+      }
     }
   });
 
